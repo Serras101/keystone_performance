@@ -44,6 +44,45 @@ concurrency::
   <start time>,<end time>,<concurrency>,<latency p90>
 
 
+load_test_multiple_users
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Run ``python keystone_performance.load_test_multiple_users``
+
+This test generates load at a certain concurrency for some amount of time, then
+generates load at another concurrency and so forth. When all the concurrencies
+are run it prints out a summary.
+
+This test makes v3 token creation calls for random keystone users to generate
+load.  These test users must have a name starting with 'load_user',
+must be in the 'Default' domain, and must have a role in that domain.  The
+--test-users-password command-line option will be used to authenticate as each
+test user.  Therefore, these test users must all share the same password.
+
+Arguments, with default (if any)::
+
+  --type: full
+  --url: http://localhost:35357
+  --username: demo
+  --password
+  --user-domain-name: Default
+  --user-domain-id
+  --project-name: demo
+  --project-id
+  --project-domain-name: Default
+  --project-domain-id
+  --out-file
+  --test-users-password
+
+For developers, you'll want to set ``--type=quick`` this runs a few low
+concurrency tests for a short time just to show that the program works.
+
+If --out_file is provided then a file is generated with 1 line per
+concurrency::
+
+  <start time>,<end time>,<concurrency>,<latency p90>
+
+
 test1
 -----
 
